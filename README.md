@@ -4,6 +4,8 @@ Juan Ignacio Crovetto Navarro.
 Enlace a carpeta compartida en Google Drive con video demostrando el despliegue:
 https://drive.google.com/drive/folders/1OP1AWsKDnoQJU_sy6TUBOLrL5zLdhr_h?usp=sharing
 
+Date: 02-10-2025.-
+
 ## Propósito del proyecto.
 
 El proyecto consiste en una arquitectura en la nube de AWS con tres servidores web, cada uno ejecutando un contenedor Docker que muestra un tipo de queso diferente. Un balanceador de carga se encargará de distribuir el tráfico entre estos servidores para asegurar la disponibilidad y el rendimiento.
@@ -31,7 +33,7 @@ En variables.tf defino las entradas parametrizables que uso en el resto de la co
 
 terraform.tfvars
 
-En terraform.tfvars coloco los valores concretos para las variables obligatorias o que quiero sobrescribir en este entorno específico; Terraform los carga automáticamente al ejecutar plan/apply y así doy valores operativos (en tu caso la variable my_ip con un valor que permite acceso SSH desde cualquier IP).
+En terraform.tfvars coloco los valores concretos para las variables obligatorias o que quiero sobrescribir en este entorno específico; Terraform los carga automáticamente al ejecutar plan/apply y así doy valores operativos (en mi caso la variable my_ip con un valor que permite acceso SSH desde cualquier IP).
 
 
 terraform.tfvars.example
@@ -46,7 +48,7 @@ En user_data.sh incluyo el script que se ejecutará en el arranque de cada insta
 
 outputs.tf
 
-En outputs.tf declaro las salidas que quiero mostrar al terminar el despliegue —en tu caso un único resumen_final formateado con el DNS público del ALB y las IPs públicas de las instancias—; las salidas me permiten comunicar URLs, IPs, ARNs u otros valores útiles que serán visibles tras un terraform apply y que pueden integrarse en otros módulos o scripts.
+En outputs.tf declaro las salidas que quiero mostrar al terminar el despliegue —en mi caso un único resumen_final formateado con el DNS público del ALB y las IPs públicas de las instancias—; las salidas me permiten comunicar URLs, IPs, ARNs u otros valores útiles que serán visibles tras un terraform apply y que pueden integrarse en otros módulos o scripts.
 
 
 ## Ejecución:
