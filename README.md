@@ -1,8 +1,10 @@
 # Evaluación Parcial 1 | Infraestructura como código I (001V).
 Juan Ignacio Crovetto Navarro.
 
+Enlace a carpeta compartida en Google Drive con video demostrando el despliegue:
+https://drive.google.com/drive/folders/1OP1AWsKDnoQJU_sy6TUBOLrL5zLdhr_h?usp=sharing
 
-## Propósito del proyecto .
+## Propósito del proyecto.
 
 El proyecto consiste en una arquitectura en la nube de AWS con tres servidores web, cada uno ejecutando un contenedor Docker que muestra un tipo de queso diferente. Un balanceador de carga se encargará de distribuir el tráfico entre estos servidores para asegurar la disponibilidad y el rendimiento.
 
@@ -61,6 +63,7 @@ En outputs.tf declaro las salidas que quiero mostrar al terminar el despliegue �
 
 - Descarga los archivos de este repositorio y recuerda la carpeta en donde estan (dejaste) los archivos de este proyecto.
 
+
 2.- Configuración AWS CLI:
 
 - Ejecuta en la terminal:
@@ -68,6 +71,7 @@ En outputs.tf declaro las salidas que quiero mostrar al terminar el despliegue �
 aws configure
 
 E ingresa la información que te vaya pidiendo.
+
 
 - Ya con la información ingresada, verifica la identidad dentro de AWS (esto te permitirá también saber si estas conectado correctamente).
 
@@ -82,19 +86,23 @@ aws sts get-caller-identity
 
 terraform init
 
+
 2 - Valida la consistencia de los archivos Terraform con:
 
 terraform validate
 
+
 3 - Crea un plan con:
 
 terraform plan
+
 
 4 - Aplica el plan guardado exactamente como fue diseñado con:
 
 terraform apply
 
 (pedirá confirmación interactiva)
+
 
 5 - Opcional: Obtén salidas útiles tras apply (DNS del ALB y IPs públicas):
 
@@ -109,15 +117,18 @@ terraform output -json
 
 Para esta evaluación en particular, en el navegador, después de entrar en la dirección entregada por la terminal, ve refrescando la pagina (actualizando) con F5 por ejemplo en Mozilla Firefox y veras como iras saltando de queso en queso. Son 3 quesos distintos. Fíjate en el nombre de cada queso, ese es su identificador. Si saltas por los 3 nombres distintos, entonces funciona todo correctamente.
 
+
 - Si configuraste ssh_key_name y my_ip correctamente, te puedes conectar a una instancia:
 
 ssh -i /ruta/a/mi-key.pem ${ssh_user}@<IP_PUBLICA_DE_INSTANCIA>
 #usuario por defecto: ec2-user salvo que lo cambies en terraform.tfvars (ssh_user)
 
+
 - Comprueba contenedores y logs dentro de una instancia (SSH):
 
 sudo docker ps -a
 sudo docker logs <CONTAINER_ID>
+
 
 - Verifica health checks en la consola AWS o con describe-target-health si tengo AWS CLI suficiente:
 
