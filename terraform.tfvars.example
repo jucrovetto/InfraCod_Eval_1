@@ -1,0 +1,86 @@
+# terraform.tfvars.example
+# Copia este archivo a terraform.tfvars y edítalo con valores apropiados para tu entorno.
+# No compartas terraform.tfvars en repositorios públicos.
+
+# REGION
+aws_region = "us-east-1"
+# selecciono la region AWS donde desplegaré los recursos.
+
+# TIPO DE INSTANCIA
+instance_type = "t2.micro"
+# elijo el tipo de instancia EC2 según mis necesidades de CPU, RAM y presupuesto.
+
+# IP PARA SSH
+my_ip = "0.0.0.0/0"
+# defino la direccion CIDR que permitira acceso SSH. Reemplaza por "TU_IP_PUBLICA/32" para seguridad.
+
+# IMAGENES DOCKER
+docker_images = [
+  "errm/cheese:wensleydale",
+  "errm/cheese:cheddar",
+  "errm/cheese:stilton",
+]
+# listo las imagenes Docker que quiero ejecutar; la longitud de la lista define cuantas instancias se crearan.
+
+# AMI FILTER / OWNERS (para data.aws_ami)
+ami_name_filter = "amzn2-ami-hvm-*-x86_64-gp2"
+ami_owners = ["amazon"]
+# ajusto el filtro y owners usados para seleccionar la AMI de Amazon Linux 2.
+
+# NOMBRES DE RECURSOS
+alb_name = "cheese-alb"
+alb_tag_name = "Cheese-ALB"
+tg_name = "cheese-tg"
+alb_sg_name = "alb-security-group"
+web_sg_name = "web-server-security-group"
+alb_sg_tag = "ALB-SG"
+web_sg_tag = "WebServer-SG"
+# personalizo nombres y etiquetas que se veran en la consola.
+
+# ACCESO AL ALB
+alb_ingress_cidr = "0.0.0.0/0"
+# controlo que CIDR puede acceder al ALB; limita esto para endurecer seguridad.
+
+# SUBNETS Y IP PUBLICA EN INSTANCIAS
+public_subnet_count = 3
+associate_public_ip = true
+# indico cuantas subnets publicas usar para el ALB y si las instancias obtienen IP publica.
+
+# SSH KEY Y USUARIO
+ssh_key_name = "" # Ejemplo: "mi-key-aws" o "" para no establecer key pair
+ssh_user = "ec2-user"
+# indico la key pair para SSH y el usuario del sistema dentro de la AMI.
+
+# DOCKER RUN (user-data)
+docker_publish_port = "80:80"
+docker_run_extra_args = ""
+# ajusto el mapeo de puertos host:container y cualquier flag extra para docker run.
+
+# HEALTH CHECKS
+health_check_port = 80
+health_check_path = "/"
+health_check_protocol = "HTTP"
+health_check_matcher = "200"
+health_check_interval = 30
+health_check_timeout = 5
+health_check_healthy_threshold = 2
+health_check_unhealthy_threshold = 2
+# configuro la ruta, puerto y tolerancias del health check del Target Group.
+
+# ALB TUNING
+alb_idle_timeout = 60
+# tiempo de idle timeout del ALB en segundos.
+
+# OUTPUTS PERSONALIZABLES
+output_message_alb_instr = "JCrovetto: Aca esta el nombre DNS publico del Application Load Balancer. Seleccionalo, copialo y pegalo en tu navegador web. Pulsa ENTER y empieza a jugar presionando F5 en tu navegador para ir cambiando de queso."
+output_message_ips_instr = "JCrovetto: Aca estan las direcciones IP publicas de las instancias EC2 para acceso SSH."
+output_message_final = "JCrovetto: AWS a la concha de tu madre me tienes chato con tus mamadas."
+# personalizo los mensajes que se muestran tras terraform apply.
+
+# TAGS
+tags = {
+  Environment = "dev"
+  Owner       = "jcrovetto"
+  Project     = "cheese"
+}
+# defino las etiquetas que se aplicaran a los recursos para facturacion y gestion.
